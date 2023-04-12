@@ -1,0 +1,48 @@
+﻿@model List<BasketVM>
+@{
+    ViewData["Title"] = "Card";
+}
+
+<div class="container my-5">
+    <h4 class="text-center" style="color:darkviolet">Basket Products</h4>
+    <table class="table my-5">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <th scope="row"><img src="~/img/@product.Product.Images.FirstOrDefault()?.Image" style="width: 100px; height: 100px;" /></th>
+                    <th scope="row">@product.Product.Name</th>
+                    <td>$ @product.Product.Price</td>
+                    <td>@product.Product.Description</td>
+                    <td>@product.Count</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @{
+        decimal totalPrice = 0;
+
+        foreach (var item in Model)
+        {
+            totalPrice += (item.Product.Price * item.Count);
+        }
+    }
+
+
+    <div class="total-price">
+        <h4 style="color:darkviolet">Total price: $ @totalPrice </h4>
+    </div>
+
+</div>
+
+
